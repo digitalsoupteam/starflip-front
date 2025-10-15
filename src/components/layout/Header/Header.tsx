@@ -8,7 +8,7 @@ const Header: FC = () => {
   return (
     <header className={'bg-grey-darkest'}>
       <Wrapper>
-        <div className={'flex items-center gap-2 justify-between'}>
+        <div className={'flex items-center gap-2 justify-between py-4 md:py-5'}>
           <Logo />
           <Socials className={'max-md:hidden'} />
           <div className={'flex items-center gap-7'}>
