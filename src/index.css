@@ -12,7 +12,7 @@
     --color-red: #D5241D;
     --color-emerald: #4EF5C3;
 
-    --background-pink-purple: linear-gradient(180deg, #d0f 0%, #7c00ff 100%);
+    --background-pink-purple: linear-gradient(180deg, #d0f 0%, #7c00ff 50%, #d0f 100%);
     --background-purple-purple: linear-gradient(180deg, #75f 0%, #7c00ff 100%);
 }
 
@@ -49,6 +49,37 @@ body,
 body main {
     @apply
     flex-grow
+}
+
+[data-testid="rk-connect-button"] {
+    font-size: 20px !important;
+    font-weight: 700 !important;
+    border-radius: 10px !important;
+    padding: 5px 20px !important;
+    background: var(--background-pink-purple) !important;
+    background-size: auto 200% !important;
+    background-position: 0 0 !important;
+    height: fit-content !important;
+
+    @media (hover: hover) {
+        &:hover {
+            background-position: 0 100% !important;
+            transform: scale(1) !important;
+        }
+    }
+
+    &:focus-visible {
+        background-position: 0 100% !important;
+        transform: scale(1) !important;
+    }
+}
+
+.tr-d-all {
+    transition: 0.3s ease-in-out all;
+}
+
+.tr-d {
+    transition: 0.3s ease-in-out;
 }
 
 .visually-hidden {
