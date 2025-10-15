@@ -98,3 +98,33 @@ body main {
 .scrollbar-hidden {
     scrollbar-width: none;
 }
+
+.neon-blink-purple {
+    filter: drop-shadow(0 0 10px #9d00ff);
+    animation: neonPurpleBlink 1.8s ease-in-out infinite;
+    transition: filter 0.3s ease-in-out;
+}
+
+@keyframes neonPurpleBlink {
+    0%, 100% {
+        filter: drop-shadow(0 0 12px #9d00ff);
+    }
+    50% {
+        filter: drop-shadow(0 0 2px #9d00ff);
+    }
+}
+
+.neon-blink-emerald {
+    filter: drop-shadow(0 0 10px #00ffb3);
+    animation: neonEmeraldBlink 1.8s ease-in-out infinite 0.3s;
+    transition: filter 0.3s ease-in-out;
+}
+
+@keyframes neonEmeraldBlink {
+    0%, 100% {
+        filter: drop-shadow(0 0 9px #00ffb3)
+    }
+    50% {
+        filter: drop-shadow(0 0 2px #00ffb3)
+    }
+}
