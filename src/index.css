@@ -12,8 +12,8 @@
     --color-red: #D5241D;
     --color-emerald: #4EF5C3;
 
-    --background-pink-purple: linear-gradient(180deg, #d0f 0%, #7c00ff 50%, #d0f 100%);
-    --background-purple-purple: linear-gradient(180deg, #75f 0%, #7c00ff 100%);
+    --background-image-pink-purple: linear-gradient(180deg, #d0f 0%, #7c00ff 50%, #d0f 100%);
+    --background-image-purple-purple: linear-gradient(180deg, #75f 0%, #7c00ff 100%);
 }
 
 html {
@@ -56,7 +56,7 @@ body main {
     font-weight: 700 !important;
     border-radius: 10px !important;
     padding: 5px 20px !important;
-    background: var(--background-pink-purple) !important;
+    background: var(--background-image-pink-purple) !important;
     background-size: auto 200% !important;
     background-position: 0 0 !important;
     height: fit-content !important;

@@ -5,7 +5,7 @@ import SoonSVG from '../../../assets/soon.svg?react';
 
 const Games = () => {
   return (
-    <section>
+    <section id={'games'}>
       <Wrapper>
         <div className={'mb-7.5 md:mb-15'}>
           <h2 className={'text-white text-2xl font-bold mb-3 md:mb-4'}>Games</h2>
