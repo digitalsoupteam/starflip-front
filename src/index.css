@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+@layer base {
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+}
+
 @theme {
     --color-grey-darkest: #121318;
     --color-grey-dark: #191F23;
@@ -11,9 +19,17 @@
     --color-purple: #7C00FF;
     --color-red: #D5241D;
     --color-emerald: #4EF5C3;
+    --shadow-emerald: 6px 6px 20px 0 rgba(0, 255, 179, 0.25);
 
     --background-image-pink-purple: linear-gradient(180deg, #d0f 0%, #7c00ff 50%, #d0f 100%);
     --background-image-purple-purple: linear-gradient(180deg, #75f 0%, #7c00ff 100%);
+    --background-image-emerald-emerald: linear-gradient(180deg, #00dfd0 0%, #00ffb3 100%);
+}
+
+.font-righteous {
+    font-family: "Righteous", sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
 html {
@@ -103,6 +119,14 @@ body main {
     filter: drop-shadow(0 0 10px #9d00ff);
     animation: neonPurpleBlink 1.8s ease-in-out infinite;
     transition: filter 0.3s ease-in-out;
+}
+
+.text-stroke-emerald {
+    -webkit-text-stroke: 1px #4EF5C3;
+}
+
+.text-stroke-pink {
+    -webkit-text-stroke: 1px #E883FF;
 }
 
 @keyframes neonPurpleBlink {

@@ -12,7 +12,7 @@ const Games = () => {
           <div className={'grid grid-cols-3 gap-3 md:gap-5 lg:grid-cols-5'}>
             <a
               className={
-                'relative overflow-hidden rounded-[10px] aspect-[0.92] md:rounded-[20px] border-1 border-grey-dark bg-[url(/grid-preview-1.png)] bg-size-[100%] tr-d-all hover:bg-size-[120%]'
+                'relative overflow-hidden shadow-emerald rounded-[10px] aspect-[0.92] md:rounded-[20px] border-1 border-emerald bg-[url(/grid-preview-1.png)] bg-size-[100%] tr-d-all hover:bg-size-[120%]'
               }
               href={'/grid/'}
             >
@@ -31,7 +31,7 @@ const Games = () => {
             </a>
             <a
               className={
-                'relative overflow-hidden rounded-[10px] aspect-[0.92] md:rounded-[20px] border-1 border-grey-dark bg-[url(/dice-preview-1.png)] bg-size-[100%] tr-d-all hover:bg-size-[120%]'
+                'relative overflow-hidden shadow-emerald rounded-[10px] aspect-[0.92] md:rounded-[20px] border-1 border-emerald bg-[url(/dice-preview-1.png)] bg-size-[100%] tr-d-all hover:bg-size-[120%]'
               }
               href={'/dice/'}
             >

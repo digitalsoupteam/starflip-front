@@ -13,7 +13,7 @@ import '@rainbow-me/rainbowkit/styles.css';
 const queryClient = new QueryClient();
 
 const config = getDefaultConfig({
-  appName: 'My RainbowKit App',
+  appName: 'StarFlip',
   projectId: '6872ab944b4959f13cd347e4dfbb6680',
   chains: [baseSepolia],
   ssr: true,
@@ -29,7 +29,7 @@ function App() {
             <main>
               <Routes>
                 <Route path='/' element={<Home />} />
-                {/*<Route path='/dice' element={<Dice />} />*/}
+                <Route path='/dice' element={<Dice />} />
               </Routes>
             </main>
             <Footer />

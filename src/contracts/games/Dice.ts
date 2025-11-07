@@ -1,7 +1,9 @@
+import type { Address } from 'viem';
+
 export default {
   addresses: {
     hardhat: '',
-    baseSepolia: '0x0096c931F3733bEaAAcEBaCfc3cF8C5bb9eF0f8D',
+    baseSepolia: '0xb2D0878EaC3C735f25B3d8e16784bBe523C00265' as Address,
     base: '',
   },
   abi: [
