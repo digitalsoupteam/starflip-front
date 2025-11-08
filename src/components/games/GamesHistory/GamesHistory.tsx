@@ -11,7 +11,7 @@ import 'swiper/css';
 import 'swiper/css/autoplay';
 
 interface GamesHistoryProps {
-  game: 'Dice';
+  game: 'Dice' | 'Grid';
 }
 
 const GamesHistory: FC<GamesHistoryProps> = ({ game }) => {
@@ -28,6 +28,8 @@ const GamesHistory: FC<GamesHistoryProps> = ({ game }) => {
     },
   });
 
+  if (!logs) return null;
+
   return (
     <section className={'pb-5 pointer-events-none'}>
       <Wrapper>
@@ -40,22 +42,41 @@ const GamesHistory: FC<GamesHistoryProps> = ({ game }) => {
               className={'bg-grey-darkest rounded-[5px] shadow-emerald border-[#009999] border-1 text-xs p-2.5 !w-fit'}
               key={logItem.logIndex}
             >
-              <div>
-                {new Date(Number(BigInt(logs[0].blockTimestamp)) * 1000).toLocaleDateString('en-US', {
-                  day: '2-digit',
-                  month: 'short',
-                  year: 'numeric',
-                })}
-                {' | '}
-                {logItem.args.comparisonType === 0 ? '>' : '<'}
-                {logItem.args.targetNumber}
-                {' | '}
-                {formatEther(logItem.args.amount)}
-                {' → '}
-                <span className={logItem.args.payout > 0 ? 'text-emerald' : 'text-red'}>
-                  {formatEther(logItem.args.payout).toString().slice(0, 6)} ETH
-                </span>
-              </div>
+              {game === 'Dice' && (
+                <div>
+                  {new Date(Number(BigInt(logs[0].blockTimestamp)) * 1000).toLocaleDateString('en-US', {
+                    day: '2-digit',
+                    month: 'short',
+                    year: 'numeric',
+                  })}
+                  {' | '}
+                  {logItem.args.comparisonType === 0 ? '>' : '<'}
+                  {logItem.args.targetNumber}
+                  {' | '}
+                  {formatEther(logItem.args.amount)}
+                  {' → '}
+                  <span className={logItem.args.payout > 0 ? 'text-emerald' : 'text-red'}>
+                    {formatEther(logItem.args.payout).toString().slice(0, 6)} ETH
+                  </span>
+                </div>
+              )}
+
+              {game === 'Grid' && (
+                <div>
+                  {new Date(Number(BigInt(logs[0].blockTimestamp)) * 1000).toLocaleDateString('en-US', {
+                    day: '2-digit',
+                    month: 'short',
+                    year: 'numeric',
+                  })}
+                  {' | '}
+                  {formatEther(logItem.args.amount)}
+                  {' → '}
+                  <span className={logItem.args.payout > 0 ? 'text-emerald' : 'text-red'}>
+                    {formatEther(logItem.args.payout).toString().slice(0, 8)} ETH
+                  </span>
+                </div>
+              )}
+
               <div>
                 {logItem.args.player.slice(0, 4)}..{logItem.args.player.slice(-4)}
               </div>
