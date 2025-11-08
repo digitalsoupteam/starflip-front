@@ -9,6 +9,7 @@ import Home from './pages/Home.tsx';
 import Dice from './pages/Dice.tsx';
 
 import '@rainbow-me/rainbowkit/styles.css';
+import Grid from './pages/Grid.tsx';
 
 const queryClient = new QueryClient();
 
@@ -30,6 +31,7 @@ function App() {
               <Routes>
                 <Route path='/' element={<Home />} />
                 <Route path='/dice' element={<Dice />} />
+                <Route path='/grid' element={<Grid />} />
               </Routes>
             </main>
             <Footer />

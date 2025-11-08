@@ -9,9 +9,10 @@ import { Wrapper } from '../../layout';
 
 interface WinModalProps {
   payout: bigint;
+  onPlayCallback?: () => void;
 }
 
-const WinModal: FC<WinModalProps> = ({ payout }) => {
+const WinModal: FC<WinModalProps> = ({ payout, onPlayCallback }) => {
   const [isOpened, setIsOpened] = useState(false);
   const modalRef = useRef(null);
 
@@ -27,7 +28,6 @@ const WinModal: FC<WinModalProps> = ({ payout }) => {
       )}
       onClick={evt => {
         if (evt.target !== modalRef.current) return;
-        console.log('close');
         setIsOpened(false);
       }}
       ref={modalRef}
@@ -43,7 +43,15 @@ const WinModal: FC<WinModalProps> = ({ payout }) => {
               Do you want <br />a rematch?
             </div>
             <div className={'w-fit'}>
-              <Button className={'mb-2.5'} visualType={'primary'} size={'md'} onClick={() => setIsOpened(false)}>
+              <Button
+                className={'mb-2.5'}
+                visualType={'primary'}
+                size={'md'}
+                onClick={() => {
+                  setIsOpened(false);
+                  onPlayCallback && onPlayCallback();
+                }}
+              >
                 Play again
               </Button>
               <div className={'text-purple text-center text-xs'}>
