@@ -9,6 +9,7 @@ import { DeployedContracts } from '../contracts';
 import { formatEther, formatUnits, parseEther } from 'viem/utils';
 import { Button } from '../components/ui';
 import { motion } from 'framer-motion';
+import { useConnectModal } from '@rainbow-me/rainbowkit';
 
 const Dice = () => {
   const [rollStarted, setRollStarted] = useState<boolean | null>(null);
@@ -19,6 +20,8 @@ const Dice = () => {
   const [payout, setPayout] = useState<bigint>(0n);
 
   const { address } = useAccount();
+  const { openConnectModal } = useConnectModal();
+
   const gridContractConfig = {
     address: DeployedContracts.games.Grid.addresses.baseSepolia,
     abi: DeployedContracts.games.Grid.abi,
@@ -318,10 +321,14 @@ const Dice = () => {
                   className={'p-4 w-full !h-auto'}
                   visualType={'secondary'}
                   size={'md'}
-                  onClick={payout ? resetGame : roll}
+                  onClick={() => {
+                    if (!address) return openConnectModal();
+                    if (payout) return resetGame();
+                    return roll();
+                  }}
                   disabled={Boolean(rollStarted)}
                 >
-                  {payout ? 'Again' : 'Bet'}
+                  {payout ? 'Again' : 'Open'}
                 </Button>
               </div>
             </div>

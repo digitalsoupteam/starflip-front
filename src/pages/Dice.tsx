@@ -17,6 +17,7 @@ import { DeployedContracts } from '../contracts';
 import { formatEther, formatUnits, parseEther } from 'viem/utils';
 import { Button } from '../components/ui';
 import { zeroAddress } from 'viem';
+import { useConnectModal } from '@rainbow-me/rainbowkit';
 
 const Dice = () => {
   const [rollStarted, setRollStarted] = useState(false);
@@ -27,6 +28,8 @@ const Dice = () => {
   const STEP = 1;
 
   const { address } = useAccount();
+  const { openConnectModal } = useConnectModal();
+
   const diceContractConfig = {
     address: DeployedContracts.games.Dice.addresses.baseSepolia,
     abi: DeployedContracts.games.Dice.abi,
@@ -372,7 +375,7 @@ const Dice = () => {
                   className={'p-4 w-full !h-auto'}
                   visualType={'secondary'}
                   size={'md'}
-                  onClick={roll}
+                  onClick={address ? roll : openConnectModal}
                   disabled={rollStarted}
                 >
                   Bet
