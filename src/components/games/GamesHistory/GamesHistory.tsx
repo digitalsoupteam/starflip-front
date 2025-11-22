@@ -22,7 +22,7 @@ const GamesHistory: FC<GamesHistoryProps> = ({ game }) => {
     address: DeployedContracts.games[game].addresses.baseSepolia,
     abi: DeployedContracts.games[game].abi,
     eventName: 'BetSettled',
-    fromBlock: latestBlockNumber && latestBlockNumber - 5000n,
+    fromBlock: latestBlockNumber && latestBlockNumber - 99000n,
     onLogs(logs) {
       setLogs(logs.reverse());
     },
