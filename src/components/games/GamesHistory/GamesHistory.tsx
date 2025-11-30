@@ -7,9 +7,6 @@ import { Wrapper } from '../../layout';
 import { DeployedContracts } from '../../../contracts';
 import { formatEther } from 'viem/utils';
 
-import 'swiper/css';
-import 'swiper/css/autoplay';
-
 interface GamesHistoryProps {
   game: 'Dice' | 'Grid';
 }
@@ -37,6 +34,7 @@ const GamesHistory: FC<GamesHistoryProps> = ({ game }) => {
       </Wrapper>
       <Swiper modules={[Autoplay]} autoplay={{ delay: 3500 }} loop={true} spaceBetween={20} slidesPerView={'auto'}>
         {logs &&
+          // @ts-ignore
           logs.slice(0, 15).map(logItem => (
             <SwiperSlide
               className={'bg-grey-darkest rounded-[5px] shadow-emerald border-[#009999] border-1 text-xs p-2.5 !w-fit'}

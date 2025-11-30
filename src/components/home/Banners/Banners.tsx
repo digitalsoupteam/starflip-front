@@ -2,11 +2,6 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
 
 import { Wrapper } from '../../layout';
-
-import 'swiper/css';
-import 'swiper/css/autoplay';
-import 'swiper/css/navigation';
-
 import { Button } from '../../ui';
 
 const Banners = () => {
@@ -32,7 +27,7 @@ const Banners = () => {
               <div
                 className={
                   'flex flex-col justify-end' +
-                  ' overflow-hidden aspect-[2.08] p-5 border-grey-dark border-1 rounded-[20px] bg-[url(banner-1.png)] bg-[120%_auto] bg-center tr-d-all hover:bg-position-[20%]' +
+                  ' overflow-hidden aspect-[2.08] p-5 border-grey-dark border-1 rounded-[20px] bg-[url(/banner-1.png)] bg-[120%_auto] bg-center tr-d-all hover:bg-position-[20%]' +
                   ' after:w-full after:h-[85px] after:absolute after:bottom-[1px] after:left-[1px] after:right-[1px] after:rounded-[20px] after:bg-gradient-to-t after:from-black from-30% after:to-transparent lg:after:h-[115px]'
                 }
               >
@@ -50,7 +45,7 @@ const Banners = () => {
               <div
                 className={
                   'flex flex-col justify-end' +
-                  ' overflow-hidden aspect-[2.08] p-5 border-grey-dark border-1 rounded-[20px] bg-[url(banner-2.png)] bg-[120%_auto] bg-center tr-d-all hover:bg-position-[20%]' +
+                  ' overflow-hidden aspect-[2.08] p-5 border-grey-dark border-1 rounded-[20px] bg-[url(/banner-2.png)] bg-[120%_auto] bg-center tr-d-all hover:bg-position-[20%]' +
                   ' after:w-full after:h-[85px] after:absolute after:bottom-[1px] after:left-[1px] after:right-[1px] after:rounded-[20px] after:bg-gradient-to-t after:from-black from-30% after:to-transparent lg:after:h-[115px]'
                 }
               >

@@ -853,5 +853,5 @@ export default {
       stateMutability: 'payable',
       type: 'receive',
     },
-  ],
+  ] as const,
 };

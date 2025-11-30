@@ -1,14 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import clsx from 'clsx';
 import { Range, getTrackBackground } from 'react-range';
-import {
-  useAccount,
-  useReadContract,
-  useWaitForTransactionReceipt,
-  useWatchContractEvent,
-  useWriteContract,
-} from 'wagmi';
+import { useAccount, useReadContract, useWatchContractEvent, useWriteContract } from 'wagmi';
 
 import { Wrapper } from '../components/layout';
 import { Breadcrumbs } from '../components/common';
@@ -24,7 +18,7 @@ const Dice = () => {
   const [betAmount, setBetAmount] = useState('');
   const [targetValue, setTargetValue] = useState([50]);
   const [rollType, setRollType] = useState(0);
-  const [settledBet, setSettledBet] = useState(null);
+  const [settledBet, setSettledBet] = useState<any>(null);
   const STEP = 1;
 
   const { address } = useAccount();
@@ -42,23 +36,9 @@ const Dice = () => {
     eventName: 'BetSettled',
     onLogs(logs) {
       const playerLogs = logs.reverse().filter(log => log.args.player === address);
-      // transactionHash
-      console.log(playerLogs[0]);
       setSettledBet(playerLogs[0]);
     },
   });
-  // const { data: result } = useWaitForTransactionReceipt({
-  //   hash: hash,
-  // });
-  //
-  // // Декодируем события по ABI
-  // const parsedLogs =
-  //   result &&
-  //   parseEventLogs({
-  //     abi: DeployedContracts.games.Dice.abi,
-  //     logs: result.logs,
-  //   });
-  //
 
   const { data: minBetValue } = useReadContract({
     ...diceContractConfig,
@@ -79,7 +59,7 @@ const Dice = () => {
   const { data: calculatedPayout } = useReadContract({
     ...diceContractConfig,
     functionName: 'calculatePayout',
-    args: [parseEther(betAmount), targetValue, rollType],
+    args: [parseEther(betAmount), BigInt(targetValue[0]), rollType],
   }) as { data?: bigint };
 
   const { data: isRollInProgress } = useReadContract({
@@ -112,7 +92,7 @@ const Dice = () => {
       ...diceContractConfig,
       functionName: 'roll',
       value: parseEther(betAmount),
-      args: [targetValue, rollType, zeroAddress, parseEther(betAmount)],
+      args: [BigInt(targetValue[0]), rollType, zeroAddress, parseEther(betAmount)],
     });
 
     setRollStarted(true);

@@ -8,13 +8,12 @@ import { GamesHistory, GridField, MascotMessage, WinModal } from '../components/
 import { DeployedContracts } from '../contracts';
 import { formatEther, formatUnits, parseEther } from 'viem/utils';
 import { Button } from '../components/ui';
-import { motion } from 'framer-motion';
 import { useConnectModal } from '@rainbow-me/rainbowkit';
 
 const Dice = () => {
   const [rollStarted, setRollStarted] = useState<boolean | null>(null);
   const [betAmount, setBetAmount] = useState<string>('');
-  const [settledBet, setSettledBet] = useState(null);
+  const [settledBet, setSettledBet] = useState<any>(null);
   const [targetCells, setTargetCells] = useState<number[] | null>(null);
   const [matches, setMatches] = useState<number>(0);
   const [payout, setPayout] = useState<bigint>(0n);
@@ -40,18 +39,15 @@ const Dice = () => {
 
       if (!latestPlayerLog) return;
 
-      const cellMask = decodeWinningCells(latestPlayerLog.args.cellMask);
-      const result = decodeWinningCells(latestPlayerLog.args.result);
+      const cellMask = decodeWinningCells(latestPlayerLog.args.cellMask as number);
+      const result = decodeWinningCells(latestPlayerLog.args.result as number);
       const matches = result.filter(x => new Set(cellMask).has(x)).length;
-      console.log('cellMask', cellMask);
-      console.log('result', result);
-      console.log('matches', matches);
       setSettledBet(latestPlayerLog);
 
       setTimeout(() => {
         setRollStarted(false);
         setMatches(matches);
-        setPayout(latestPlayerLog.args.payout);
+        setPayout(latestPlayerLog.args.payout as bigint);
       }, 6000);
     },
   });
@@ -322,9 +318,9 @@ const Dice = () => {
                   visualType={'secondary'}
                   size={'md'}
                   onClick={() => {
-                    if (!address) return openConnectModal();
-                    if (payout) return resetGame();
-                    return roll();
+                    if (!address && openConnectModal) openConnectModal();
+                    if (payout) resetGame();
+                    roll();
                   }}
                   disabled={Boolean(rollStarted)}
                 >

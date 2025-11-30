@@ -236,5 +236,5 @@ export default {
       stateMutability: 'payable',
       type: 'function',
     },
-  ],
+  ] as const,
 };
