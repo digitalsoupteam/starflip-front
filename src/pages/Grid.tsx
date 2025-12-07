@@ -207,7 +207,7 @@ const Dice = () => {
     <div className={'bg-[url(/grid-bg.png)] bg-cover'}>
       <section className={'pb-7.5'}>
         <Wrapper>
-          <Breadcrumbs items={['games', 'dice']} />
+          <Breadcrumbs items={['games', 'grid']} />
           <div className={'grid gap-4 mt-7.5 max-w-[760px] mx-auto md:gap-7.5 lg:grid-cols-2'}>
             <div className={'lg:col-span-2'}>
               <MascotMessage temperature={getTemperature()} />

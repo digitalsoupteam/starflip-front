@@ -9,7 +9,9 @@ const Breadcrumbs: FC<BreadcrumbsProps> = ({ items }) => {
 
   return (
     <div className={'flex flex-wrap items-center gap-x-1 text-grey-lightest text-base py-10'}>
-      <a className={'tr-d-all hover:text-emerald focus-visible:text-emerald'}>Home</a>
+      <a className={'tr-d-all hover:text-emerald focus-visible:text-emerald'} href={'/'}>
+        Home
+      </a>
       {items.map((item, index) =>
         index === items.length - 1 ? (
           <span className={'capitalize text-emerald'} key={'breadcrumbs item' + item}>
@@ -18,6 +20,7 @@ const Breadcrumbs: FC<BreadcrumbsProps> = ({ items }) => {
         ) : (
           <a
             className={'capitalize tr-d-all hover:text-emerald focus-visible:text-emerald'}
+            href={'/' + item}
             key={'breadcrumbs item' + item}
           >
             / {item}

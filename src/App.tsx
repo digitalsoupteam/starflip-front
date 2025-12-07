@@ -2,9 +2,9 @@ import { WagmiProvider } from 'wagmi';
 import { baseSepolia } from 'wagmi/chains';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { getDefaultConfig, RainbowKitProvider } from '@rainbow-me/rainbowkit';
-import { Routes, Route } from 'react-router-dom';
+import { Navigate, Routes, Route } from 'react-router-dom';
 
-import { Footer, Header } from './components/layout';
+import { Footer, Header, ScrollToHash } from './components/layout';
 import Home from './pages/Home.tsx';
 import Dice from './pages/Dice.tsx';
 
@@ -25,6 +25,7 @@ function App() {
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
         <RainbowKitProvider>
+          <ScrollToHash />
           <div className={'root-layout'}>
             <Header />
             <main>
@@ -32,6 +33,7 @@ function App() {
                 <Route path='/' element={<Home />} />
                 <Route path='/dice' element={<Dice />} />
                 <Route path='/grid' element={<Grid />} />
+                <Route path='/games' element={<Navigate to='/#games' replace />} />
               </Routes>
             </main>
             <Footer />
