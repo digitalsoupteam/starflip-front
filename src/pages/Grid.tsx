@@ -60,6 +60,10 @@ const Dice = () => {
     ...gridContractConfig,
     functionName: 'maxBetAmount',
   }) as { data?: bigint };
+  const { data: targetCellsQuantity } = useReadContract({
+    ...gridContractConfig,
+    functionName: 'targetCellsQuantity',
+  });
   const { data: isRollInProgress } = useReadContract({
     ...gridContractConfig,
     functionName: 'isRollInProgress',
@@ -98,7 +102,7 @@ const Dice = () => {
       ...gridContractConfig,
       functionName: 'roll',
       value: parseEther(betAmount),
-      args: [mask, zeroAddress, parseEther(betAmount)],
+      args: [mask, zeroAddress, parseEther(betAmount), zeroAddress],
     });
 
     setRollStarted(true);
@@ -174,12 +178,12 @@ const Dice = () => {
   };
 
   const onCellClick = (cell: number) => {
-    if (rollStarted) return;
+    if (rollStarted || !targetCellsQuantity) return;
 
     setTargetCells(prev => {
       if (!prev) return [cell];
       if (prev.includes(cell)) return prev.filter(c => c !== cell);
-      if (prev.length >= 5) return prev;
+      if (prev.length >= targetCellsQuantity) return prev;
 
       return [...prev, cell];
     });
@@ -243,7 +247,9 @@ const Dice = () => {
               <div className={'flex gap-3 bg-grey-darkest/90 px-5 py-4 rounded-[5px] md:p-6 md:gap-11'}>
                 <div className={'flex flex-col gap-2.5 font-righteou'}>
                   <div className={'text-grey-lightest text-xs'}>Moves</div>
-                  <div className={'text-white text-xl font-bold'}>{targetCells ? targetCells.length : 0}/5</div>
+                  <div className={'text-white text-xl font-bold'}>
+                    {targetCells ? targetCells.length : 0}/{targetCellsQuantity || 0}
+                  </div>
                 </div>
                 <div className={'flex flex-col gap-2.5 font-righteou'}>
                   <div className={'text-grey-lightest text-xs'}>Wininigs</div>

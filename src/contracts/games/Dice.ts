@@ -78,7 +78,27 @@ export default {
     },
     {
       inputs: [],
+      name: 'InvalidHouseEdge',
+      type: 'error',
+    },
+    {
+      inputs: [],
       name: 'InvalidInitialization',
+      type: 'error',
+    },
+    {
+      inputs: [],
+      name: 'InvalidMaxBetValue',
+      type: 'error',
+    },
+    {
+      inputs: [],
+      name: 'InvalidMinBetAmount',
+      type: 'error',
+    },
+    {
+      inputs: [],
+      name: 'InvalidMinBetValue',
       type: 'error',
     },
     {
@@ -89,6 +109,11 @@ export default {
     {
       inputs: [],
       name: 'InvalidTargetNumber',
+      type: 'error',
+    },
+    {
+      inputs: [],
+      name: 'MinGreaterThanMax',
       type: 'error',
     },
     {
@@ -373,6 +398,19 @@ export default {
         },
       ],
       name: 'OwnershipTransferred',
+      type: 'event',
+    },
+    {
+      anonymous: false,
+      inputs: [
+        {
+          indexed: false,
+          internalType: 'uint256',
+          name: 'subscriptionId',
+          type: 'uint256',
+        },
+      ],
+      name: 'SubscriptionIdSet',
       type: 'event',
     },
     {
@@ -702,6 +740,11 @@ export default {
           name: 'betAmount',
           type: 'uint256',
         },
+        {
+          internalType: 'address',
+          name: 'referrer',
+          type: 'address',
+        },
       ],
       name: 'roll',
       outputs: [
@@ -827,6 +870,24 @@ export default {
         },
       ],
       name: 'transferOwnership',
+      outputs: [],
+      stateMutability: 'nonpayable',
+      type: 'function',
+    },
+    {
+      inputs: [
+        {
+          internalType: 'address',
+          name: 'newCoordinator',
+          type: 'address',
+        },
+        {
+          internalType: 'uint256',
+          name: 'newSubscriptionId',
+          type: 'uint256',
+        },
+      ],
+      name: 'updateVRFSettings',
       outputs: [],
       stateMutability: 'nonpayable',
       type: 'function',
