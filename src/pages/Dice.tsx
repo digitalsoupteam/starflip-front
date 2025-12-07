@@ -92,7 +92,7 @@ const Dice = () => {
       ...diceContractConfig,
       functionName: 'roll',
       value: parseEther(betAmount),
-      args: [BigInt(targetValue[0]), rollType, zeroAddress, parseEther(betAmount)],
+      args: [BigInt(targetValue[0]), rollType, zeroAddress, parseEther(betAmount), zeroAddress],
     });
 
     setRollStarted(true);

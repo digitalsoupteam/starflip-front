@@ -78,7 +78,7 @@ export default {
     },
     {
       inputs: [],
-      name: 'InvalidCellsQuantity',
+      name: 'InvalidHouseEdge',
       type: 'error',
     },
     {
@@ -88,7 +88,22 @@ export default {
     },
     {
       inputs: [],
-      name: 'InvalidRollRange',
+      name: 'InvalidMinBetAmount',
+      type: 'error',
+    },
+    {
+      inputs: [],
+      name: 'InvalidTargetCellsQuantity',
+      type: 'error',
+    },
+    {
+      inputs: [],
+      name: 'InvalidWinCellsQuantity',
+      type: 'error',
+    },
+    {
+      inputs: [],
+      name: 'MinGreaterThanMax',
       type: 'error',
     },
     {
@@ -453,19 +468,6 @@ export default {
     },
     {
       inputs: [],
-      name: 'cellsQuantity',
-      outputs: [
-        {
-          internalType: 'uint8',
-          name: '',
-          type: 'uint8',
-        },
-      ],
-      stateMutability: 'view',
-      type: 'function',
-    },
-    {
-      inputs: [],
       name: 'getContractBalance',
       outputs: [
         {
@@ -679,6 +681,11 @@ export default {
           name: 'betAmount',
           type: 'uint256',
         },
+        {
+          internalType: 'address',
+          name: 'referrer',
+          type: 'address',
+        },
       ],
       name: 'roll',
       outputs: [
@@ -770,6 +777,45 @@ export default {
       type: 'function',
     },
     {
+      inputs: [
+        {
+          internalType: 'uint8',
+          name: 'newTargetCellsQuantity',
+          type: 'uint8',
+        },
+      ],
+      name: 'setTargetCellsQuantity',
+      outputs: [],
+      stateMutability: 'nonpayable',
+      type: 'function',
+    },
+    {
+      inputs: [
+        {
+          internalType: 'uint8',
+          name: 'newWinCellsQuantity',
+          type: 'uint8',
+        },
+      ],
+      name: 'setWinCellsQuantity',
+      outputs: [],
+      stateMutability: 'nonpayable',
+      type: 'function',
+    },
+    {
+      inputs: [],
+      name: 'targetCellsQuantity',
+      outputs: [
+        {
+          internalType: 'uint8',
+          name: '',
+          type: 'uint8',
+        },
+      ],
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
       inputs: [],
       name: 'totalCellsQuantity',
       outputs: [
@@ -829,6 +875,19 @@ export default {
       name: 'upgradeToAndCall',
       outputs: [],
       stateMutability: 'payable',
+      type: 'function',
+    },
+    {
+      inputs: [],
+      name: 'winCellsQuantity',
+      outputs: [
+        {
+          internalType: 'uint8',
+          name: '',
+          type: 'uint8',
+        },
+      ],
+      stateMutability: 'view',
       type: 'function',
     },
     {
