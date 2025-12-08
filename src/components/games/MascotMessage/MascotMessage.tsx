@@ -8,12 +8,14 @@ interface MascotMessageProps extends HTMLAttributes<HTMLDivElement> {
 
 const MascotMessage: FC<MascotMessageProps> = ({ className, temperature }) => {
   const [displayedText, setDisplayedText] = useState('');
+  const [isTypingComplete, setIsTypingComplete] = useState(false);
 
   const PICTURES = {
     ugly: ['/astra/ugly.png'],
     neutral: ['/astra/neutral-1.png', '/astra/neutral-2.png'],
     happy: ['/astra/happy.png'],
   };
+
   const MESSAGES = {
     ugly: [
       'C’mon, lucky number…',
@@ -43,23 +45,42 @@ const MascotMessage: FC<MascotMessageProps> = ({ className, temperature }) => {
   }, [temperature]);
 
   useEffect(() => {
-    setDisplayedText('');
-    let index = 0;
+    let isMounted = true;
+    let timeoutIds: NodeJS.Timeout[] = [];
 
-    setDisplayedText(randomMessage[0]);
-    index = 0;
+    const typeText = async (text: string) => {
+      if (!isMounted) return;
 
-    const interval = setInterval(() => {
-      if (index < randomMessage.length - 1) {
-        setDisplayedText(prev => prev + randomMessage[index]);
-        index++;
-      } else {
-        clearInterval(interval);
+      setDisplayedText('');
+      setIsTypingComplete(false);
+
+      for (let i = 0; i <= text.length; i++) {
+        if (!isMounted) return;
+
+        setDisplayedText(text.substring(0, i));
+
+        await new Promise<void>(resolve => {
+          const timeoutId = setTimeout(() => {
+            resolve();
+          }, 40);
+          timeoutIds.push(timeoutId);
+        });
+
+        if (i === text.length) {
+          setIsTypingComplete(true);
+        }
       }
-    }, 40);
+    };
 
-    return () => clearInterval(interval);
+    typeText(randomMessage);
+
+    return () => {
+      isMounted = false;
+      timeoutIds.forEach(id => clearTimeout(id));
+    };
   }, [randomMessage]);
+
+  const showCursor = !isTypingComplete && displayedText.length > 0;
 
   return (
     <div className={clsx('bg-grey-darkest rounded-[5px]', className)}>
@@ -71,7 +92,7 @@ const MascotMessage: FC<MascotMessageProps> = ({ className, temperature }) => {
           </div>
           <div className='text-pink text-base min-h-[1.5em]'>
             {displayedText}
-            {displayedText.length + 1 < randomMessage.length && (
+            {showCursor && (
               <motion.span animate={{ opacity: [0, 1, 0] }} transition={{ duration: 0.8, repeat: Infinity }}>
                 |
               </motion.span>

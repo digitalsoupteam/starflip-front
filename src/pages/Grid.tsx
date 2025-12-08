@@ -64,22 +64,6 @@ const Dice = () => {
     ...gridContractConfig,
     functionName: 'targetCellsQuantity',
   });
-  const { data: isRollInProgress } = useReadContract({
-    ...gridContractConfig,
-    functionName: 'isRollInProgress',
-    account: address,
-    query: {
-      refetchInterval: rollStarted ? 1000 : 0,
-    },
-  }) as { data?: boolean };
-  const { data: currentBet } = useReadContract({
-    ...gridContractConfig,
-    functionName: 'getCurrentBet',
-    account: address,
-    query: {
-      refetchInterval: rollStarted ? 1000 : 0,
-    },
-  });
   const { data: potAmount } = useReadContract({
     ...gridContractConfig,
     functionName: 'calculatePot',
@@ -88,7 +72,8 @@ const Dice = () => {
   });
 
   const roll = () => {
-    if (!targetCells || targetCells.length < 5) return;
+    if (!targetCellsQuantity) return;
+    if (!targetCells || targetCells.length < targetCellsQuantity) return;
 
     let mask = 0;
     for (const cell of targetCells) {
@@ -168,11 +153,10 @@ const Dice = () => {
   };
 
   const getTemperature = () => {
-    if (rollStarted) return 'neutral';
-    if (isRollInProgress) return 'neutral';
+    if (!settledBet || rollStarted) return 'neutral';
 
-    if (currentBet && currentBet[4]) return 'happy';
-    if (currentBet && !currentBet[4]) return 'ugly';
+    if (settledBet && settledBet[4]) return 'happy';
+    if (settledBet && !settledBet[4]) return 'ugly';
 
     return 'neutral';
   };

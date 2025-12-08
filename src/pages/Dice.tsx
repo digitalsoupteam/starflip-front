@@ -61,15 +61,6 @@ const Dice = () => {
     functionName: 'calculatePayout',
     args: [parseEther(betAmount), BigInt(targetValue[0]), rollType],
   }) as { data?: bigint };
-
-  const { data: isRollInProgress } = useReadContract({
-    ...diceContractConfig,
-    functionName: 'isRollInProgress',
-    account: address,
-    query: {
-      refetchInterval: rollStarted ? 1000 : 0,
-    },
-  }) as { data?: boolean };
   const { data: latestRollResult } = useReadContract({
     ...diceContractConfig,
     functionName: 'getLatestRollResult',
@@ -78,14 +69,6 @@ const Dice = () => {
       refetchInterval: rollStarted ? 1000 : 0,
     },
   }) as { data?: bigint };
-  const { data: currentBet } = useReadContract({
-    ...diceContractConfig,
-    functionName: 'getCurrentBet',
-    account: address,
-    query: {
-      refetchInterval: rollStarted ? 1000 : 0,
-    },
-  });
 
   const roll = () => {
     writeContract({
@@ -137,11 +120,10 @@ const Dice = () => {
   };
 
   const getTemperature = () => {
-    if (rollStarted) return 'neutral';
-    if (isRollInProgress) return 'neutral';
+    if (!settledBet || rollStarted) return 'neutral';
 
-    if (currentBet && currentBet[4]) return 'happy';
-    if (currentBet && !currentBet[4]) return 'ugly';
+    if (settledBet && settledBet[4]) return 'happy';
+    if (settledBet && !settledBet[4]) return 'ugly';
 
     return 'neutral';
   };
